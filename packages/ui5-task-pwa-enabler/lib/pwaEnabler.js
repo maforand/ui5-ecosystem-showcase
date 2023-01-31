@@ -201,7 +201,12 @@ async function addAdvancedCachingSw(parameters) {
 	for (let i = 0; i < resources.length; i++) {
 		// Remove prefix
 		let path = resources[i].getPath().replace(rootDir, "");
-		preCache = preCache + '\n"' + path + '",';
+		//preCache = preCache + '\n"' + path + '",';
+		if (i === resources.length - 1){
+			preCache = preCache + '\n"' + path + '"';
+		}else{
+			preCache = preCache + '\n"' + path + '",';
+		}
 	}
 	// Concatenate all regular expressions for networkFirst
 	let networkFirst = "";
