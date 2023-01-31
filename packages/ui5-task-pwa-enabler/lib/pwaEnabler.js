@@ -273,7 +273,7 @@ async function appendToIndexHtmlHead(element) {
 async function addManifest(manifestConfig) {
 	let manifest = Object.assign(default_manifest, manifestConfig); //default_manifest will be overidden
 	await writeFile({ path: rootDir + "/manifest.webmanifest", content: JSON.stringify(manifest) });
-	await appendToIndexHtmlHead('<link rel="manifest" href="manifest.webmanifest">');
+	await appendToIndexHtmlHead('<link rel="manifest" href="manifest.webmanifest" crossorigin="use-credentials">');
 	if (!manifestConfig.icons) {
 		//if no icons are provided use default icons
 		let icon192 = await readFile(path.join(__dirname, "../default_icon/192x192.png"));
