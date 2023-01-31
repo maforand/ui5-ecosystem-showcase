@@ -52,7 +52,12 @@ self.addEventListener("activate", function (event) {
 // If any fetch fails, it will look for the request in the cache and serve it from there first
 self.addEventListener("fetch", function (event) {
   if (event.request.method !== "GET") return;
-
+	
+	// do not fetch extension requests
+	if ( event.request.url.startsWith("chrome-extension") ||
+       event.request.url.includes("extension") ||
+      !(event.request.url.indexOf("http") === 0) ) return;	
+	
   if (comparePaths(event.request.url, networkFirstPaths)) {
     networkFirstFetch(event);
   } else {
